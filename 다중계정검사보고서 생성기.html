@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>다중계정 검사 보고서 입력</title>
+    <style>
+      /* 스타일 지정 */
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"] {
+        width: 300px;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      textarea {
+        width: 300px;
+        height: 100px;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #3e8e41;
+      }
+      input[type="date"] {
+        width: 300px;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>다중계정 검사 보고서 입력</h1>
+    <form id="report-form">
+      <label for="inspector">검사 진행자:</label>
+      <input type="text" id="inspector" name="inspector" required>
+      <label for="inspection-date">검사일:</label>
+      <input type="date" id="inspection-date" name="inspection-date" required>
+      <label for="inspection-device">검사 계기:</label>
+      <input type="text" id="inspection-device" name="inspection-device" required>
+      <label for="suspect">피검사자:</label>
+      <input type="text" id="suspect" name="suspect" required>
+      <label for="inspection-target">검사대상:</label>
+      <input type="text" id="inspection-target" name="inspection-target" required>
+      <label for="ip-match">IP 일치 여부:</label>
+      <input type="text" id="ip-match" name="ip-match" required>
+      <label for="device-info">User-Agent 상 기기정보:</label>
+      <textarea id="device-info" name="device-info" required></textarea>
+      <label for="email-similarity">이메일 계정의 유사도:</label>
+      <input type="text" id="email-similarity" name="email-similarity" required>
+      <label for="processing-result">처리결과:</label>
+      <textarea id="processing-result" name="processing-result" required></textarea>
+      <button type="submit">제출하기</button>
+    </form>
+
+    <script>
+      const reportForm = document.getElementById('report-form');
+      reportForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+      const inspector = document.getElementById('inspector').value;
+const inspectionDate = document.getElementById('inspection-date').value;
+const inspectionDevice = document.getElementById('inspection-device').value;
+const suspect = document.getElementById('suspect').value;
+const inspectionTarget = document.getElementById('inspection-target').value;
+const ipMatch = document.getElementById('ip-match').value;
+const deviceInfo = document.getElementById('device-info').value;
+const emailSimilarity = document.getElementById('email-similarity').value;
+const processingResult = document.getElementById('processing-result').value;
+
+    // 랜덤한 16진수 색상코드 생성
+    const colorCode = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+    // 양식 생성
+    const report = `
+        [[분류:다중계정 검사 보고서]]<br>
+        [include(틀:상위 문서, top1=알파위키:다중계정 검사 보고서)]<br>
+        '''{{{#red 경고: 편집 권한이 있어도, 검사관의 인가 없이 임의로 편집하시면 안됩니다!}}}'''<br>
+        '''다중계정 검사 보고서는 반드시 [[알파위키:기본규칙#다중 계정 검사|기본규칙]]에 따라 작성해 주시기 바랍니다.'''<br>
+        '''작성 후 반드시 [[알파위키:다중계정 검사 보고서]]에 형식에 맞게 보고서를 등재해 주셔야 합니다.'''<br><br>
+
+        == 검사 개요 ==<br>
+        || 검사 코드 || {{{#${colorCode} ■ ${colorCode} }}} ||<br>
+        || 검사 진행자 || ${inspector} ||<br>
+        || 검사일 || ${inspectionDate} ||<br>
+        || 검사 계기 || ${inspectionDevice} ||<br>
+        || 피검사자 || ${suspect} ||<br>
+        || 검사대상 || ${inspectionTarget} ||<br>
+        || 근거 || IP 일치 여부: ${ipMatch}<br>
+        ----<br>
+        User-Agent 상 기기정보: ${deviceInfo}<br>
+        ----<br>
+        이메일 계정의 유사도: ${emailSimilarity} ||<br>
+        || 처리결과 || ${processingResult} ||<br>
+    `;
+
+
+
+    // 출력
+    const reportWindow = window.open();
+    reportWindow.document.write(report);
+  });
+</script>
+  </body>
+</html>
